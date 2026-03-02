@@ -226,8 +226,8 @@ export default function ChatWindow() {
             alt={chat.name}
             className="w-10 h-10 rounded-full object-cover mr-3 shrink-0"
           />
-          <div className="flex flex-col min-w-0 flex-1">
-            <span className="text-[16px] text-[var(--text-primary)] font-medium leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
+          <div className="flex flex-col min-w-0">
+            <span className="text-[16px] text-[var(--text-primary)] font-medium leading-tight whitespace-nowrap truncate">
               {chat.name}
             </span>
             <span className="text-[13px] text-[var(--text-secondary)] leading-tight truncate">
@@ -317,7 +317,7 @@ export default function ChatWindow() {
                               ~ {msg.sender}
                             </span>
                           )}
-                          <p className="text-[14.2px] leading-relaxed break-words whitespace-pre-wrap pr-4">{msg.text}</p>
+                          <p className="text-[14.2px] leading-snug break-words whitespace-pre-wrap pr-1">{msg.text}</p>
                           <div className="flex items-center justify-end space-x-1 mt-1 -mr-6">
                             <span className="hora-envio text-[11px] text-[var(--text-secondary)] opacity-70">
                               {formatTime(msg.timestamp)}
@@ -330,7 +330,7 @@ export default function ChatWindow() {
                           </div>
 
                           {!msg.isDeleted && (
-                            <div className={`absolute -top-1 -right-7 transition-all z-10 ${activeMenuId === msg.id ? 'opacity-100' : 'opacity-0 group-hover/bubble:opacity-100'}`}>
+                            <div className={`absolute -top-1 -right-7 transition-all z-40 ${activeMenuId === msg.id ? 'opacity-100' : 'opacity-0 group-hover/bubble:opacity-100'}`}>
                               <div className="relative">
                                 <button
                                   onClick={(e) => {

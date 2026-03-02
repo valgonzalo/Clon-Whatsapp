@@ -3,6 +3,7 @@ import ChatList from '../components/ChatList';
 import ChatWindow from '../components/ChatWindow';
 import ProfileView from '../components/ProfileDrawer';
 import SideNav from '../components/SideNav';
+import ResizablePanel from '../components/ResizablePanel';
 import { useAuth } from '../context/AuthContext';
 
 export default function ChatPage() {
