@@ -227,7 +227,7 @@ export default function ChatWindow() {
             className="w-10 h-10 rounded-full object-cover mr-3 shrink-0"
           />
           <div className="flex flex-col min-w-0">
-            <span className="text-[16px] text-[var(--text-primary)] font-medium leading-tight truncate">
+            <span className="text-[16px] text-[var(--text-primary)] font-medium leading-tight">
               {chat.name}
             </span>
             <span className="text-[13px] text-[var(--text-secondary)] leading-tight truncate">
@@ -242,7 +242,7 @@ export default function ChatWindow() {
           <button className="p-2 text-[#8696a0] hover:text-[#54656f]">
             <Phone className="w-5 h-5" />
           </button>
-          <div className="w-[1px] h-6 bg-[var(--border-default)] mx-2"></div>
+
           <button
             title={t('search')}
             onClick={() => setIsSearching(!isSearching)}
