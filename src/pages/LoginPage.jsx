@@ -156,11 +156,6 @@ export default function LoginPage() {
                 </p>
               </div>
 
-              <div className="pt-4">
-                <span className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] text-white/60 font-black uppercase tracking-[0.2em]">
-                  Encrypted System v2.0
-                </span>
-              </div>
             </div>
           </div>
         </div>
