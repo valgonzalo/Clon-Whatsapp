@@ -1,0 +1,233 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html, body {
+  scroll-behavior: smooth;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root, .light {
+  --bg-main: #f0f2f5;
+  --bg-app: #ffffff;
+  --bg-side: #ffffff;
+  --bg-header: rgba(240, 242, 245, 0.85);
+  --bg-chat: #efeae2;
+  --bg-input: #ffffff;
+  --bg-search: #f0f2f5;
+  --bg-bubble-me: #dcf8c6;
+  --bg-bubble-other: #ffffff;
+  --text-primary: #111b21;
+  --text-secondary: #667781;
+  --text-header: #54656f;
+  --border-default: rgba(0, 0, 0, 0.08);
+  --border-chat: rgba(0, 0, 0, 0.05);
+  --accent-green: #00a884;
+  --accent-neon: #00d26a;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --neon-glow: none;
+}
+
+.dark {
+  --bg-main: #080a0c;
+  --bg-app: #0b141a;
+  --bg-side: #0b141a;
+  --bg-header: rgba(17, 27, 33, 0.85);
+  --bg-chat: #060809;
+  --bg-input: #202c33;
+  --bg-search: #202c33;
+  --bg-bubble-me: #005c4b;
+  --bg-bubble-other: #202c33;
+  --text-primary: #e9edef;
+  --text-secondary: #8696a0;
+  --text-header: #aebac1;
+  --border-default: rgba(255, 255, 255, 0.05);
+  --border-chat: rgba(255, 255, 255, 0.03);
+  --accent-green: #00ffa3;
+  --accent-neon: #00ffa3;
+  --glass-bg: rgba(11, 20, 26, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --neon-glow: 0 0 20px rgba(0, 255, 163, 0.2);
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(134, 150, 160, 0.2);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(134, 150, 160, 0.3);
+  }
+
+  /* Ultra Smooth Scrolling */
+  .smooth-scroll {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(20px) saturate(180%);
+    background-color: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+  }
+}
+
+@layer components {
+  /* Layout */
+  .contenedor-principal {
+    @apply flex h-[100dvh] bg-[var(--bg-main)] overflow-hidden relative justify-center items-center;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(0, 255, 163, 0.03) 0%, transparent 50%),
+      linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+  }
+
+  .contenedor-app {
+    @apply z-10 flex w-full h-full max-w-[2000px] mx-auto bg-[var(--bg-app)] overflow-hidden shadow-2xl;
+    border-left: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+  }
+
+  .panel-lateral {
+    @apply w-full md:w-[420px] flex-shrink-0 h-full border-r border-[var(--border-default)];
+    background-color: var(--bg-side);
+  }
+
+  /* SideBar Components */
+  .encabezado-usuario {
+    @apply px-4 py-3 bg-[var(--bg-header)] flex justify-between items-center z-20 backdrop-blur-xl border-b border-[var(--border-default)];
+  }
+
+  .contenedor-avatar {
+    @apply w-10 h-10 rounded-full border border-[var(--glass-border)] overflow-hidden cursor-pointer transition-transform active:scale-95;
+  }
+
+  .menu-iconos {
+    @apply flex space-x-6 text-[var(--text-header)];
+  }
+
+  .contenedor-buscador {
+    @apply p-2 bg-[var(--bg-app)] border-b border-[var(--border-default)];
+  }
+
+  .caja-busqueda {
+    @apply relative flex items-center bg-[var(--bg-search)] rounded-xl px-4 py-2 transition-all focus-within:ring-1 focus-within:ring-[var(--accent-green)]/30;
+  }
+
+  .input-buscar {
+    @apply w-full bg-transparent border-none focus:outline-none text-[var(--text-primary)] placeholder-[var(--text-secondary)] text-sm h-8;
+  }
+
+  .lista-chats {
+    @apply flex-1 overflow-y-auto bg-[var(--bg-app)] custom-scrollbar;
+  }
+
+  .item-chat {
+    @apply flex items-center px-4 py-3.5 cursor-pointer transition-all duration-200 border-b border-[var(--border-chat)] hover:bg-[var(--bg-header)];
+  }
+
+  .item-chat-activo {
+    @apply bg-[var(--bg-header)];
+    border-left: 4px solid var(--accent-green);
+  }
+
+  /* Animations */
+  .animate-message {
+    animation: messageRevealer 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes messageRevealer {
+    from {
+      opacity: 0;
+      transform: translateY(15px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes hubGlow {
+    0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 255, 163, 0.2)); }
+    50% { filter: drop-shadow(0 0 15px rgba(0, 255, 163, 0.4)); }
+  }
+
+  .animate-hub {
+    animation: hubGlow 3s infinite ease-in-out;
+  }
+
+  /* ChatWindow */
+  .area-chat {
+    @apply flex flex-col h-full bg-[var(--bg-chat)] relative;
+  }
+
+  .fondo-chat {
+    @apply absolute inset-0 z-0 opacity-[0.03] bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat grayscale;
+  }
+
+  .encabezado-chat {
+    @apply px-4 py-3 flex items-center justify-between z-20 glass-effect;
+  }
+
+  .contenedor-mensajes {
+    @apply flex-1 overflow-y-auto p-6 pb-10 z-10 custom-scrollbar;
+  }
+
+  .burbuja-mensaje {
+    @apply max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-2.5 shadow-md relative text-[14.5px] leading-[21px] transition-all;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .burbuja-mia {
+    @apply bg-[var(--bg-bubble-me)] rounded-tr-sm ml-auto text-[var(--text-primary)];
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+  }
+
+  .burbuja-otro {
+    @apply bg-[var(--bg-bubble-other)] rounded-tl-sm mr-auto text-[var(--text-primary)];
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.02), transparent);
+  }
+
+  .pie-chat {
+    @apply px-4 py-3 flex items-center space-x-4 z-20 glass-effect border-t border-[var(--border-default)];
+  }
+
+  .input-mensaje {
+    @apply flex-1 px-5 py-3 bg-[var(--bg-input)] rounded-full focus:outline-none text-[var(--text-primary)] placeholder-[var(--text-secondary)] text-[15px] shadow-inner transition-all focus:ring-1 focus:ring-[var(--accent-green)]/40;
+  }
+
+  /* LoginPage */
+  .pagina-login {
+    @apply min-h-[100dvh] flex flex-col bg-[var(--bg-main)] relative overflow-hidden;
+  }
+
+  .encabezado-login {
+    @apply absolute top-0 w-full h-56 bg-[var(--accent-green)] z-0 opacity-80;
+    background: linear-gradient(135deg, #00ffa3 0%, #00a884 100%);
+  }
+
+  .tarjeta-login {
+    @apply bg-[var(--bg-app)] rounded-3xl shadow-2xl w-full max-w-md p-10 border border-[var(--glass-border)] backdrop-blur-md;
+  }
+
+  .boton-verde {
+    @apply w-full py-4 px-6 bg-[var(--accent-green)] hover:brightness-110 text-black font-semibold rounded-2xl shadow-lg transition-all active:scale-[0.98] uppercase text-sm tracking-widest;
+    box-shadow: var(--neon-glow);
+  }
+}
