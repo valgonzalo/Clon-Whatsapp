@@ -413,7 +413,7 @@ export default function ChatWindow() {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder={t('chatInput')}
-            className="w-full py-2.5 px-4 bg-[var(--bg-app)] border-none rounded-lg outline-none text-[var(--text-primary)] text-sm shadow-sm focus:ring-1 focus:ring-[var(--accent-green)] transition-all"
+            className="w-full py-2.5 px-4 bg-[var(--bg-input)] border-none rounded-lg outline-none text-[var(--text-primary)] text-sm shadow-sm focus:ring-1 focus:ring-[var(--accent-green)] transition-all"
           />
         </form>
         <button

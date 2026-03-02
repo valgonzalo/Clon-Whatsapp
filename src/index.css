@@ -35,15 +35,15 @@ html, body {
   --bg-main: #080a0c;
   --bg-app: #0b141a;
   --bg-side: #0b141a;
-  --bg-header: rgba(17, 27, 33, 0.85);
-  --bg-chat: #060809;
-  --bg-input: #202c33;
+  --bg-header: #202c33;
+  --bg-chat: #0c141a;
+  --bg-input: #2a3942;
   --bg-search: #202c33;
   --bg-bubble-me: #005c4b;
   --bg-bubble-other: #202c33;
   --text-primary: #e9edef;
   --text-secondary: #8696a0;
-  --text-header: #aebac1;
+  --text-header: #d1d7db;
   --border-default: rgba(255, 255, 255, 0.05);
   --border-chat: rgba(255, 255, 255, 0.03);
   --accent-green: #00ffa3;
@@ -267,16 +267,24 @@ html, body {
   .encabezado-chat {
     @apply px-4 py-3 flex items-center justify-between z-20;
     backdrop-filter: blur(20px) saturate(180%);
-    background-color: var(--glass-bg);
-    border-bottom: 1px solid var(--glass-border);
+    background-color: var(--bg-header);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .info-contacto {
+    @apply flex items-center cursor-pointer min-w-0;
   }
 
   .contenedor-mensajes {
     @apply flex-1 overflow-y-auto p-6 pb-10 z-10;
   }
 
+  .fila-mensaje {
+    @apply flex w-full mb-1;
+  }
+
   .burbuja-mensaje {
-    @apply max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-2.5 shadow-md relative text-[14.5px] leading-[21px] transition-all;
+    @apply w-fit max-w-[85%] sm:max-w-[65%] rounded-2xl px-4 py-2.5 shadow-md relative text-[14.5px] leading-[21px] transition-all;
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
@@ -293,7 +301,7 @@ html, body {
   .pie-chat {
     @apply px-4 py-3 flex items-center space-x-4 z-20 border-t border-[var(--border-default)];
     backdrop-filter: blur(20px) saturate(180%);
-    background-color: var(--glass-bg);
+    background-color: var(--bg-header);
   }
 
   .input-mensaje {
