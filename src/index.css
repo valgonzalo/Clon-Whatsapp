@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-html, body {
+html,
+body {
   scroll-behavior: smooth;
   background-color: var(--bg-main);
   color: var(--text-primary);
@@ -9,7 +10,8 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-:root, .light {
+:root,
+.light {
   --bg-main: #f0f2f5;
   --bg-app: #ffffff;
   --bg-side: #ffffff;
@@ -80,12 +82,10 @@ html, body {
   height: 150vh;
   top: -25%;
   left: -25%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.03) 25%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 25%,
+      transparent 70%);
   filter: blur(80px);
   opacity: 0.4;
   pointer-events: none;
@@ -96,11 +96,9 @@ html, body {
 }
 
 .aurora-beam-2 {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.05) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 60%);
   animation: aurora-sweep 25s infinite alternate ease-in-out;
   animation-delay: -5s;
 }
@@ -111,9 +109,17 @@ html, body {
 }
 
 @keyframes aurora-sweep {
-  0% { transform: translate(-10%, -10%) rotate(0deg) scale(1); }
-  50% { transform: translate(10%, 5%) rotate(5deg) scale(1.1); }
-  100% { transform: translate(-5%, 15%) rotate(-5deg) scale(0.95); }
+  0% {
+    transform: translate(-10%, -10%) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translate(10%, 5%) rotate(5deg) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-5%, 15%) rotate(-5deg) scale(0.95);
+  }
 }
 
 .premium-glass {
@@ -171,13 +177,14 @@ html, body {
 }
 
 @layer components {
+
   /* Layout */
   .contenedor-principal {
     @apply flex h-[100dvh] bg-[var(--bg-main)] overflow-hidden relative justify-center items-center;
-    background-image: 
+    background-image:
       radial-gradient(circle at 50% 50%, rgba(0, 255, 163, 0.03) 0%, transparent 50%),
-      linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+      linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
     background-size: 100% 100%, 40px 40px, 40px 40px;
   }
 
@@ -240,6 +247,7 @@ html, body {
       opacity: 0;
       transform: translateY(15px) scale(0.95);
     }
+
     to {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -247,8 +255,15 @@ html, body {
   }
 
   @keyframes hubGlow {
-    0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 255, 163, 0.2)); }
-    50% { filter: drop-shadow(0 0 15px rgba(0, 255, 163, 0.4)); }
+
+    0%,
+    100% {
+      filter: drop-shadow(0 0 5px rgba(0, 255, 163, 0.2));
+    }
+
+    50% {
+      filter: drop-shadow(0 0 15px rgba(0, 255, 163, 0.4));
+    }
   }
 
   .animate-hub {
@@ -284,18 +299,28 @@ html, body {
   }
 
   .burbuja-mensaje {
-    @apply w-fit max-w-[85%] sm:max-w-[65%] rounded-2xl px-4 py-2.5 shadow-md relative text-[14.5px] leading-[21px] transition-all;
+    @apply w-fit rounded-2xl shadow-md relative text-[14.5px] leading-[21px] transition-all;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 70%;
+    padding: 7px 12px;
+  }
+
+  @media (max-width: 600px) {
+    .burbuja-mensaje {
+      max-width: 90%;
+      padding: 5px 8px;
+      margin: 2px 0;
+    }
   }
 
   .burbuja-mia {
     @apply bg-[var(--bg-bubble-me)] rounded-tr-sm ml-auto text-[var(--text-primary)];
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);
   }
 
   .burbuja-otro {
     @apply bg-[var(--bg-bubble-other)] rounded-tl-sm mr-auto text-[var(--text-primary)];
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.02), transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
   }
 
   .pie-chat {
