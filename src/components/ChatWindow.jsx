@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useChats } from '../context/ChatContext';
-import { ArrowLeft, Send, MoreVertical, Phone, Video, Search, Paperclip, Smile, Mic, CheckCheck, ChevronDown, Copy, Trash2, Ban, X } from 'lucide-react';
+import { ArrowLeft, Send, MoreVertical, Phone, Video, Search, Paperclip, Smile, Mic, CheckCheck, ChevronDown, Copy, Trash2, Ban, X, Camera } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import ContactInfoView from './ContactInfo';
@@ -243,15 +243,7 @@ export default function ChatWindow() {
             <Phone className="w-5 h-5" />
           </button>
 
-          <button
-            title={t('search')}
-            onClick={() => setIsSearching(!isSearching)}
-            className={`p-2 rounded-full transition-colors ${
-              isSearching ? 'bg-[#f0f2f5] text-[#00a884]' : 'text-[#8696a0] hover:bg-black/5'
-            }`}
-          >
-            <Search className="w-5 h-5" />
-          </button>
+
           <button title={t('menu')} className="p-2 text-[#8696a0] hover:bg-black/5 rounded-full transition-colors">
             <MoreVertical className="w-5 h-5" />
           </button>
@@ -383,9 +375,9 @@ export default function ChatWindow() {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="pie-chat relative">
+      <div className="pie-chat relative !bg-[var(--bg-app)] !px-2 !py-2 !space-x-2 !border-none">
         {showEmojiPicker && (
-          <div className="absolute bottom-full left-0 z-[100] mb-4 shadow-2xl rounded-xl overflow-hidden border border-[var(--border-default)] animate-in slide-in-from-bottom-2 duration-200">
+          <div className="absolute bottom-full left-0 z-[100] mb-2 shadow-2xl rounded-xl overflow-hidden border border-[var(--border-default)] animate-in slide-in-from-bottom-2 duration-200">
             <EmojiPicker 
               onEmojiClick={handleEmojiClick}
               theme="dark"
@@ -394,33 +386,46 @@ export default function ChatWindow() {
             />
           </div>
         )}
-        <button 
-          onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-          className={`p-2 rounded-full transition-all active:scale-95 ${showEmojiPicker ? 'text-[var(--accent-green)] bg-[var(--accent-green)]/10' : 'text-[#8696a0] hover:bg-black/5'}`}
-        >
-          <Smile className="w-6 h-6" />
-        </button>
-        <button 
-          onClick={() => fileInputRef.current?.click()}
-          className="p-2 text-[#8696a0] hover:bg-black/5 rounded-full transition-all active:scale-95"
-        >
-          <Paperclip className="w-6 h-6" />
-          <input type="file" ref={fileInputRef} className="hidden" />
-        </button>
-        <form onSubmit={handleSend} className="flex-1 px-2">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder={t('chatInput')}
-            className="w-full py-2.5 px-4 bg-[var(--bg-input)] border-none rounded-lg outline-none text-[var(--text-primary)] text-sm shadow-sm focus:ring-1 focus:ring-[var(--accent-green)] transition-all"
-          />
-        </form>
+        
+        <div className="flex-1 flex items-center bg-[var(--bg-input)] rounded-full px-1 min-h-[48px]">
+          <button 
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+            className={`p-2 lg:h-10 lg:w-10 flex items-center justify-center rounded-full transition-all active:scale-95 ${showEmojiPicker ? 'text-[var(--accent-green)]' : 'text-[#8696a0] hover:text-[var(--text-primary)]'}`}
+          >
+            <Smile className="w-[24px] h-[24px]" />
+          </button>
+          
+          <form onSubmit={handleSend} className="flex-1 flex items-center h-full px-1">
+            <input
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              placeholder="Mensaje"
+              className="w-full bg-transparent border-none outline-none text-[var(--text-primary)] text-[16px] placeholder-[#8696a0]"
+            />
+          </form>
+
+          <div className="flex items-center pr-1 shrink-0">
+            <button 
+              onClick={() => fileInputRef.current?.click()}
+              className="p-2 text-[#8696a0] hover:text-[var(--text-primary)] transition-all active:scale-95 -rotate-45"
+            >
+              <Paperclip className="w-6 h-6" />
+              <input type="file" ref={fileInputRef} className="hidden" />
+            </button>
+            {!newMessage.trim() && (
+              <button className="p-2 text-[#8696a0] hover:text-[var(--text-primary)] transition-all active:scale-95">
+                <Camera className="w-6 h-6" />
+              </button>
+            )}
+          </div>
+        </div>
+
         <button
           onClick={handleSend}
-          className="p-2.5 bg-transparent text-[#8696a0] hover:text-[#00a884] transition-all hover:scale-110 active:scale-90"
+          className="w-12 h-12 flex items-center justify-center bg-white rounded-full text-black hover:bg-gray-100 transition-colors shrink-0 shadow-sm ml-2"
         >
-          {newMessage.trim() ? <Send className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+          {newMessage.trim() ? <Send className="w-5 h-5 ml-1" /> : <Mic className="w-6 h-6" />}
         </button>
       </div>
 
