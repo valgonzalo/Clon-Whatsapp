@@ -226,8 +226,8 @@ export default function ChatWindow() {
             alt={chat.name}
             className="w-10 h-10 rounded-full object-cover mr-3 shrink-0"
           />
-          <div className="flex flex-col min-w-0">
-            <span className="text-[16px] text-[var(--text-primary)] font-medium leading-tight">
+          <div className="flex flex-col min-w-0 flex-1">
+            <span className="text-[16px] text-[var(--text-primary)] font-medium leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
               {chat.name}
             </span>
             <span className="text-[13px] text-[var(--text-secondary)] leading-tight truncate">
